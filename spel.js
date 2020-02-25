@@ -6,6 +6,7 @@ console.log("js connected");
 var grid = {};
 var clickedCell;
 var messageDisplay = document.querySelector("#message");
+var messagePlayer = document.querySelector("#player");
 var cell = document.querySelectorAll("td");
 var playerOneOnMove = true;
 
@@ -17,9 +18,33 @@ function init() {
 }
 
 function checkWin() {
-    if (grid[a1]==="1") {
+    console.log(grid);
+    if (grid.a1 === grid.a2 && grid.a2 === grid.a3 && grid.a1 != undefined && grid.a2 != undefined && grid.a3 != undefined ||
+        grid.b1 === grid.b2 && grid.b2 === grid.b3 && grid.b1 != undefined && grid.b2 != undefined && grid.b3 != undefined ||
+        grid.c1 === grid.c2 && grid.c2 === grid.c3 && grid.c1 != undefined && grid.c2 != undefined && grid.c3 != undefined ||
+        
+        grid.a1 === grid.b1 && grid.b1 === grid.c1 && grid.a1 != undefined && grid.b1 != undefined && grid.c1 != undefined ||
+        grid.a2 === grid.b2 && grid.b2 === grid.c2 && grid.a2 != undefined && grid.b2 != undefined && grid.c2 != undefined ||
+        grid.a3 === grid.b3 && grid.b3 === grid.c3 && grid.a3 != undefined && grid.b3 != undefined && grid.c3 != undefined ||
+        
+        grid.a1 === grid.b2 && grid.b2 === grid.c3 && grid.a1 != undefined && grid.b2 != undefined && grid.c3 != undefined ||
+        grid.a3 === grid.b2 && grid.b2 === grid.c1 && grid.a3 != undefined && grid.b2 != undefined && grid.c1 != undefined
+    ) {
         console.log("winnaar");
-    } else { return;}
+        if (playerOneOnMove) {
+            alert("player O has won");
+        } else { alert("player X has won"); }
+    } else {
+        console.log("ik moet huilen");
+    }
+}
+
+function displayPlayer() {
+    if (playerOneOnMove) {
+        messagePlayer.textContent = "X";
+    } else {
+        messagePlayer.textContent = "O";
+    }
 }
 
 // listeners and accepting clicks //
@@ -33,18 +58,22 @@ function spelGrid() {
             //check if cell is empty 
             if (grid[clickedCell] === undefined) {
                 if (playerOneOnMove) {
-                    grid[clickedCell] ="1";
+                    grid[clickedCell] = 1;
                     this.textContent = "X";
                 } else {
-                    grid[clickedCell] ="2";
+                    grid[clickedCell] = 2;
                     this.textContent = "O";
                 }
                 playerOneOnMove = !playerOneOnMove;
                 messageDisplay.textContent = "gezet";
                 checkWin();
+                displayPlayer();
             } else {
                 this.style.background = "#99ffff";
-                messageDisplay.textContent = "klik op een leeg veld"
+                // setTimeout(() => {clearInterval(timerId); function(){cell[i].style.background = "#ffffff";}}, 100);
+                messageDisplay.textContent = "klik op een leeg veld";
+                alert("Dit veld is niet leeg! klik op een leeg veld");
+                this.style.background = "#ffffff";
             }
         });
     }
@@ -56,7 +85,10 @@ function spelGrid() {
 
 // Reset  //
 function reset() {
-Object.keys(grid).forEach(key => grid[key]=null);
+    console.log("reset");
+    grid = {};
+}
+// Object.keys(grid).forEach(key => grid[key]=null);
     // delete grid;
 // grid.length = 0;
     // grid = 0;
@@ -76,7 +108,7 @@ Object.keys(grid).forEach(key => grid[key]=null);
     // 		} else {
     // 			squares[i].style.display = "none";
     // 		}
-}
+
 // 	h1.style.background = "steelblue";
 // }
 // move
