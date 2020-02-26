@@ -1,20 +1,38 @@
 container {
     display: flex; 
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: row; 
   }
-
+row {
+    display: flex; 
+    flex-wrap: wrap;
+    flex-direction: column;
+}
 left {
     order: 1;
     justify-content: center;
+    flex-wrap: wrap;
     width: 30vmax; 
     height: 20vmax;
-    border: 0.1em; 
+    margin: 1vmax;
+    border: 1em; 
     border-radius: 1em;
-    padding-top: 1vmax;
-    padding-bottom: 1vmax;
+    padding: 1vmax; 
     background-color: cornflowerblue; 
     }
+corner {
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 30vmax; 
+    height: 20vmax;
+    margin: 1vmax;
+    border: 1em;
+    padding: 1vmax; 
+    border-radius: 1vmax;
+    background-color: lightcoral;  
+}
+
 
 main {
     order:2;
@@ -22,7 +40,7 @@ main {
     height: 60vmax;
     }
 
-p {font-family:'Noto Sans TC', sans-serif; font-size: 3vmax; line-height: 0.1em;}
+p, label, input {font-family:'Noto Sans TC', sans-serif; font-size: 1.5vmax; line-height: 1.2em;}
 
 h1 {font-size: 6vw; line-height: 0.1em;}
 

@@ -17,41 +17,53 @@
 
 <body>
     <container>
-    <left>
-        <p>U speeld met: <span ID="human"> X </span></p>
-        <p>JS speeld met: <span ID="computer"> O </span></p>
-        <p><span ID="player"> X </span> is aanzet.</p>
-        <p><span ID="message"> Selecteer een veld </span></p>
-    </left>
-<main>
-    <table>
-        <caption>
-            <h1>Tic Tac Toe </h1>
-        </caption>
-        <tr>
-            <td ID=a1></td>
-            <td ID=b1></td>
-            <td ID=c1></td>
-        </tr>
-        <tr>
-            <td ID=a2></td>
-            <td ID=b2></td>
-            <td ID=c2></td>
-        </tr>
-        <tr>
-            <td ID=a3></td>
-            <td ID=b3></td>
-            <td ID=c3></td>
-        </tr>
-    </table>
-</main>
+        <row>
+            <left>
+                <label for="player1"> Player 1:</label><br>
+                <input type="text" id="player1" name="player1" placeholder="Enter name 1st player"><br>
+                <input type="button" id="human" value="2nd player Computer?" name="auto"><br>
+                <span id="displaySecond">
+                    <label for="player2"> Player 2:</label><br>
+                    <input type="text" id="player2" name="player2" placeholder="Enter 2nd players name">
+                </span><br>
+                <input type="button" id="setup" name="setup" value="Start Score">
+                <input type="button" id="restart" name="restart" value="Reset Game"><br>
+                <p><span ID="player"> X </span> is aanzet.</p> <br>
+                <p><span ID="message"> Selecteer een veld. </span></p>
+            </left>
+            <corner>
+                <p>Score: </p>
+            </corner>
+        </row>
+        <main>
+            <table>
+                <caption>
+                    <h1>Tic Tac Toe </h1>
+                </caption>
+                <tr>
+                    <td ID=a1></td>
+                    <td ID=b1></td>
+                    <td ID=c1></td>
+                </tr>
+                <tr>
+                    <td ID=a2></td>
+                    <td ID=b2></td>
+                    <td ID=c2></td>
+                </tr>
+                <tr>
+                    <td ID=a3></td>
+                    <td ID=b3></td>
+                    <td ID=c3></td>
+                </tr>
+            </table>
+        </main>
 
-    <!--[if lt IE 7]>
+        <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <script src="spel.js" async defer></script>
-</container>
+        <script src="spel.js" async defer></script>
+    </container>
 </body>
 
 </html>
