@@ -1,6 +1,6 @@
 container {
     display: flex; 
-    flex-wrap: nowrap;
+    flex-wrap: wrap-reverse;
     flex-direction: row; 
   }
 row {
@@ -11,23 +11,21 @@ row {
 left {
     order: 1;
     justify-content: center;
-    flex-wrap: wrap;
     width: 30vmax; 
-    height: 20vmax;
+    min-height: 10vmax; 
     margin: 1vmax;
-    border: 1em; 
-    border-radius: 1em;
+    border: 1vmax; 
+    border-radius: 1vmax;
     padding: 1vmax; 
     background-color: cornflowerblue; 
     }
 corner {
     order: 2;
     justify-content: center;
-    flex-wrap: wrap;
-    width: 30vmax; 
-    height: 20vmax;
+    min-width: 30vmax; 
+    min-height: 20vmax; 
     margin: 1vmax;
-    border: 1em;
+    border: 1vmax;
     padding: 1vmax; 
     border-radius: 1vmax;
     background-color: lightcoral;  
@@ -36,8 +34,10 @@ corner {
 
 main {
     order:2;
-    width: 60vmax; 
-    height: 60vmax;
+    width: 62vmax; 
+    height: 62vmax;
+    min-width: 500px;
+    min-height: 500px;
     }
 
 p, label, input {font-family:'Noto Sans TC', sans-serif; font-size: 1.5vmax; line-height: 1.2em;}

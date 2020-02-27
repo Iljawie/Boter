@@ -1,28 +1,32 @@
 console.log("js connected");
-//restart game//
+
 // document.removeChild(element)
 
 // setug up game, make empty array, set all spans to base state.//
 var grid = {};
+var wantMove = {};
 var clickedCell;
 var messageDisplay = document.querySelector("#message");
 var messagePlayer = document.querySelector("#player");
 var computer = document.querySelector("#human");
 var resetGame = document.getElementById("restart");
 var setupGame = document.getElementById("setup");
-var player1 = document.getElementById("player1").value;
 var displaySecond = document.getElementById("displaySecond");
-var player2 = document.getElementById("player2").value;
 var cell = document.querySelectorAll("td");
 var playerOneOnMove = true;
+var name1;
+var name2;
+var score1 = 0;
+var score2 = 0;
+// allways on listeners for functions
 resetGame.addEventListener("click", reset);
 computer.addEventListener("click", toggleComputer);
+setupGame.addEventListener("click", setId);
 
 
 init();
 function init() {
     //    setupGrid();
-    setId();
     spelGrid();
     reset();
 }
@@ -43,13 +47,27 @@ function checkWin() {
         console.log("winnaar");
         if (playerOneOnMove) {
             alert("player O has won");
+            ++score2;
+            console.log(score2)
+            var str = document.getElementById("ScoreName2")
+            str.innerHTML = score2
             reset();
         } else {
             alert("player X has won");
+            ++score1;
+            console.log(score1)
+            var str = document.getElementById("ScoreName1")
+            str.innerHTML = score1
             reset();
         }
     } else {
-        console.log("ik moet huilen");
+        if (grid.a1 != undefined && grid.a2 != undefined && grid.a3 != undefined &&
+            grid.b1 != undefined && grid.b2 != undefined && grid.b3 != undefined &&
+            grid.c1 != undefined && grid.c2 != undefined && grid.c3 != undefined
+        ) {
+            alert("Remise, speel nogmaals!");
+            reset();
+        }
     }
 }
 
@@ -92,9 +110,58 @@ function spelGrid() {
         });
     }
 }
-// Reset  //
+
+// JS play game. location
+function JSPlay() {
+    // generate random coordinates
+    // random a-c x
+    var minx = 1;
+    var maxx = 4;
+    var randomnumx = Math.floor(Math.random() * (+maxx - +minx)) + +minx;
+    var randomx = numToABC();
+    function numToABC() {
+        if (randomnumx === 1) { return "a"; }
+        if (randomnumx === 2) { return "b"; }
+        else { return "c"; }
+    };
+    // random 1-3 y
+    var miny = 1;
+    var maxy = 4;
+    var randomy = Math.floor(Math.random() * (+maxy - +miny)) + +miny;
+    var wantMove = "" + randomx + randomy;
+    console.log(wantMove);
+}
+// document.write("Random Number Generated : " + random ); 
+
+// JS move
+function JSMove() {
+    JSPlay();
+    console.log(wantMove);
+    tryMoveOnGrid(wantMove)
+}
+
+function tryMoveOnGrid() {
+    (cell.id = wantMove)
+    //grab ID of clicked cell
+    if (grid[wantMove] === undefined) {
+        if (playerOneOnMove) {
+            grid[wantMove] = 1;
+            this.textContent = "X";
+        } else {
+            grid[wantMove] = 2;
+            this.textContent = "O";
+        }
+        playerOneOnMove = !playerOneOnMove;
+        messageDisplay.textContent = "gezet";
+        checkWin();
+        displayPlayer();
+    } else { JSPlay(); }
+};
 
 
+// 
+
+//restart game//
 function reset() {
     console.log("reset");
     grid = {};
@@ -108,9 +175,18 @@ function clearGrid() {
 }
 
 // Setup ID
+
 function setId() {
     console.log("setUp");
     toggleComputer;
+    var name1 = document.getElementById("player1").value;
+    var name2 = document.getElementById("player2").value;
+    validateForm(name1);
+    validateForm(name2);
+    displayScore("DisplayName1", "met X: ", name1, "");
+    displayScore("ScoreName1", score1, "", " punten");
+    displayScore("DisplayName2", "met O: ", name2, "");
+    displayScore("ScoreName2", score2, "", " punten");
 }
 
 function toggleComputer() {
@@ -121,16 +197,24 @@ function toggleComputer() {
         displaySecond.style.display = '';
 }
 
-function validateForm() {
-    if (player1 == "") {
-        alert("Name must be filled out");
-        return false;
+function validateForm(name) {
+    if (name === "") {
+        alert("Name must be filed");
+    } else {
+        console.log("name valid, welkom " + name);
     }
+}
 
+function displayScore(x, b, y, a) {
+    var el = document.getElementById(x)
+    el.innerHTML += b += y += a;
 }
+
+
+
 // freas setup, remove forms, state names.
-function setToJS() {
-    document.getElementById("player2").value = "JS Computer player";
-}
-// go to play game
+// function setToJS() {
+//     document.getElementById("player2").value = "JS Computer player";
+// }
+
 
